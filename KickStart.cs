@@ -72,30 +72,6 @@ namespace TT_ColliderController
             {
                 var wEffect = __instance.gameObject.AddComponent<ColliderCommander.ModuleRemoveColliders>();
                 wEffect.TankBlock = __instance;
-                /*
-                if (__instance.BlockCategory == BlockCategories.Flight)
-                {
-                    var component = __instance.GetComponentInChildren<FanJet>();
-                    if (component != null)
-                    {
-                    }
-                }
-                */
-            }
-        }
-
-
-        [HarmonyPatch(typeof(TankBlock))]
-        [HarmonyPatch("OnRecycle")]
-        private class TankBlockRecycle
-        {
-            private static void Postfix(TankBlock __instance)
-            {
-                try
-                {
-                    //__instance.gameObject.GetComponent<ColliderCommander.ModuleRemoveColliders>().TryRemoveSurface();
-                }
-                catch { }
             }
         }
 
@@ -111,7 +87,7 @@ namespace TT_ColliderController
             }
         }
     }
-        public class GUIColliderController : MonoBehaviour
+    public class GUIColliderController : MonoBehaviour
     {
         //We handle the GUI for the ColliderController system here, toggle when to run real colliders or not.
 

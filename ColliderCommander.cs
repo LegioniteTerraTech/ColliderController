@@ -13,7 +13,7 @@ namespace TT_ColliderController
         public static bool AFFECT_ALL_TECHS = false; //togg for lols - also breaks the game if active at startup
         private static bool affectingAlltechs = false; //
 
-        // Store in user preferences
+        // Store in user preferences - WIP
         //int blockNamesCount = 0;
         //string[] loaded;
 
@@ -27,10 +27,6 @@ namespace TT_ColliderController
             private bool lastLocalState = false;
             private static bool ForceUpdate = false;
             private static bool lastTankState = false;
-            //private static bool lastPlayerTankState = false;
-            //private static bool lastTankBlockState = false;
-
-            //private bool PREPARE_FOR_CLUSTERBODY = false;
 
             public void Subscribe(Tank tank)
             {
@@ -125,7 +121,6 @@ namespace TT_ColliderController
                     else lastLocalState = true;
                     KickStart.updateToggle = false;
                     affectingAlltechs = AFFECT_ALL_TECHS;
-                    //No forced update here - no need to force the updates as that causes mass lag
                 }
                 else if (lastTankState != tank.FirstUpdateAfterSpawn)
                 {   //Block update
@@ -134,30 +129,7 @@ namespace TT_ColliderController
                         lastLocalState = false;
                     else lastLocalState = true;
                     lastTankState = tank.FirstUpdateAfterSpawn;
-                    //No forced update here - no need to force the updates as that causes mass lag
                 }
-                /* //Cannot use the below as block detecting operations are unstable as f^bron
-                else if (lastTankBlockState != tank.blockman.changed)
-                {   //Block update
-                    Debug.Log("COLLIDER CONTROLLER: UPDATE REQUEST - TechBlockUpdate!" + tank.blockman.changed + lastTankBlockState);
-                    if (areAllPossibleCollidersDisabled == true)
-                        lastLocalState = false;
-                    else lastLocalState = true;
-                    lastTankBlockState = tank.blockman;
-                    //No forced update here - no need to force the updates as that causes mass lag
-                }
-                //Cannot use the below as both player detecting operations (tank.PlayerFocused and tank.IsPlayer) are unstable as f^bron
-                else if (lastPlayerTankState != tank.PlayerFocused)
-                {
-                    Debug.Log("COLLIDER CONTROLLER: UPDATE REQUEST - TechPlayerUpdate!" + tank.PlayerFocused + lastPlayerTankState);
-                    if (areAllPossibleCollidersDisabled == true)
-                        lastLocalState = false;
-                    else lastLocalState = true;
-                    lastPlayerTankState = tank.PlayerFocused;
-                    //ForceUpdate = true;
-                    //No forced update here - no need to force the updates as that causes mass lag
-                }
-                */
 
                 if (areAllPossibleCollidersDisabled != lastLocalState)
                 {
@@ -191,7 +163,6 @@ namespace TT_ColliderController
                                     }
                                 }
                             }
-                            //gameObject.GetComponent<ModuleRemoveColliders>().DestroyCollidersOnBlock();
                             Debug.Log("COLLIDER CONTROLLER: SET ALL POSSIBLE COLLIDERS ON " + gameObject + " DISABLED!");
                         }
                         catch
@@ -228,7 +199,6 @@ namespace TT_ColliderController
                                     }
                                 }
                             }
-                            //gameObject.GetComponent<ModuleRemoveColliders>().ReturnCollidersOnBlock();
                             Debug.Log("COLLIDER CONTROLLER: SET ALL POSSIBLE COLLIDERS ON " + gameObject + " ENABLED!");
                         }
                         catch
@@ -244,20 +214,6 @@ namespace TT_ColliderController
         }
 
 
-        /*
-    public class ModuleColliderLock : Module
-    {
-        //   WIP!
-        //This simply disables ModuleRemoveCollider from doing anything nasty like removing colliders within a player-changable box.
-
-        //Variables
-        //  Player-Settables
-        private int localX = 1;
-        private int localY = 1;
-        private int localZ = 1;
-    }
-        */
-
         public class ModuleRemoveColliders : Module
         {
             //This is shoehorned into every block to control enabling of existing colliders
@@ -269,21 +225,14 @@ namespace TT_ColliderController
             //   - All blocks when the player in any gamemode MP (no exploit-y)
 
 
-            //Variables
-
+            //Variables\
             public RemoveColliderTank removeColliderTank;
             public TankBlock TankBlock;
             public bool DoNotDisableColliders = false;//set this to "true" through your JSON to deny collider disabling
             private bool areAllCollidersDisabledOnThisBlock = false;
             private bool UpdateNow = true;
 
-
-            /*
-            public void OnPool()
-            { //When i figure out how to reload on Tech Spawn
-                areAllCollidersDisabledOnThisBlock = false;
-            }
-            */
+            
             public void ForceUpdateThis()
             {
                 UpdateNow = true;
@@ -306,21 +255,6 @@ namespace TT_ColliderController
                     Debug.Log("SHIELD DETECTED IN " + gameObject + " CANCELING!");
                     return;//End it NOW!
                 }
-                /*
-                bool thisIsAntiGrav = gameObject.transform.GetComponent<ModuleAntiGravityEngine>();
-                if (thisIsAntiGrav)
-                {
-                    Debug.Log("ANTIGRAV DETECTED IN " + gameObject + " CANCELING!");
-                    return;//End it NOW!
-                }
-                foreach () {
-                    if (CB == "EXP_TowSet_1_Hook_111")
-                    { //The RR Multi-Tech parts are to remain uneffected.
-                        Debug.Log("MULTI-TECH BLOCK " + gameObject + " CANCELING!");
-                        return;//End it NOW!
-                    }
-                }
-                */
 
                 if (CB == "EXP_TowSet_1_Hook_111" || CB == "EXP_TowSet_1_Ring_111" || CB == "EXP_TowSet_2_Hook_223" || CB == "EXP_TowSet_2_Ring_222" || CB == "EXP_TowSet_3_Hook_223" || 
                     CB == "EXP_TowSet_3_Ring_222" || CB == "EXP_TowRing_332" || CB == "EXP_TowSet_4_Hook_322" || CB == "EXP_TowSet_4_Ring_322" || CB == "EXP_TowSet_4_Lock_311" || 
@@ -507,13 +441,6 @@ namespace TT_ColliderController
                 }
                 //Otherwise take no action
 
-            }
-
-            public void TimedUpdate()
-            {
-                //Update when the player clikx
-                Debug.Log((removeColliderTank == null ? "Uh-oh RemoveColliderTank is null!" + (TankBlock.tank == null ? " And so is the tonk" : "The tonk is not") : "RemoveColliderTank exists") 
-                    + (TankBlock.rbody == null ? "\nTankBlock Rigidbody is null" : "\nWhat?") + (TankBlock.IsAttached ? "\nThe block appears to be attached" : "\nThe block is not attached"));
             }
         }
     }
