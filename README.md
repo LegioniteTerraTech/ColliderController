@@ -6,4 +6,4 @@ Press ']' to enable the UI switches to toggle colliders.
 Requires Nuterra.NativeOptions to rebind keys.
 Supports Control Blocks.
 
-Note: Disabling colliders yields greatly increased frames on large to huge builds (250+ Blocks) but will leave you unable to remove block or protect your cab properly. 
+Note: Disabling colliders yields greatly increased frames on large to huge builds (250+ Blocks) but will leave you unable to remove blocks or protect your cab properly. 
