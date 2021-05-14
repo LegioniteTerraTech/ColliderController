@@ -1,1 +1,3 @@
+https://github.com/LegioniteTerraTech/ColliderController
 /Exund/Nuterra-UI
+/Aceba1/TTQMM-ModConfigHelper
