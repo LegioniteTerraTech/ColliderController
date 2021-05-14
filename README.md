@@ -1,4 +1,4 @@
-# ColliderController
+# TTColliderController
 Control colliders on Techs to greatly reduce lag when building or showcasing huge Techs.
 
 Press ']' to enable the UI switches to toggle colliders.
