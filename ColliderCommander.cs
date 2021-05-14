@@ -104,22 +104,9 @@ namespace TT_ColliderController
                 }
             }
 
-            /*
-            Vector3 reScale = gameObject.transform.localScale;
-            reScale.x = 0.1f;
-            reScale.y = 0.1f;
-            reScale.z = 0.1f;
-            */
-            //Application.targetFrameRate = 100;
 
             public void Update ()
             {
-                Vector3 reScale = gameObject.transform.localScale;
-                reScale.x = 0.4f;
-                reScale.y = 0.4f;
-                reScale.z = 0.4f;
-                gameObject.transform.localScale = reScale;
-                //LOL THIS WORKS
 
                 if (KickStart.updateToggle)
                 {
