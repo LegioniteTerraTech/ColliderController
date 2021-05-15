@@ -1,3 +1,0 @@
-/LegioniteTerraTech/ColliderController/tree/main/bin/Release
-/Exund/Nuterra.NativeOptions
-/Aceba1/TTQMM-ModConfigHelper
