@@ -1,4 +1,5 @@
 # TTColliderController
+(TTMM is still having issues reaching this cursed directory)
 Version 0.8
 
 Control colliders of Techs to greatly reduce lag when they are idle in the world.  
