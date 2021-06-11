@@ -1,5 +1,5 @@
 # TTColliderController
-(TTMM is still having issues reaching this cursed directory)
+(TTMM is still having issues reaching this cursed directory - I made a new one called TT_ColliderController)
 Version 0.8
 
 Control colliders of Techs to greatly reduce lag when they are idle in the world.  
